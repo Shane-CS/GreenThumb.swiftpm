@@ -106,7 +106,7 @@ struct MyRemindersView: View {
                                     content.sound = UNNotificationSound.default
 
                                     // show this notification five seconds from now
-                                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval((viewModel.userPlants[index].daysWaterFrequency * 9)), repeats: true)
+                                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval((viewModel.userPlants[index].daysWaterFrequency * 60)), repeats: true)
 
                                     // choose a random identifier
                                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)

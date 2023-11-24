@@ -14,6 +14,16 @@ struct HomeView: View {
     @State private var selectedTipId: UUID?
     @State private var selectedTip: GardeningTipsDataTipStructure?
 
+    static func numReminders(viewModel: UserPlantsViewModel) -> Int {
+        var numReminders = 0
+        for i in viewModel.userPlants {
+            if i.waterReminder == true {
+                numReminders += 1
+            }
+        }
+        return numReminders
+    }
+
     var body: some View {
         let columns = [
             GridItem(.flexible()),
@@ -57,10 +67,39 @@ struct HomeView: View {
                     .frame(width: 350, height: 200) // Adjust the size to your needs
                     // .background(RoundedRectangle(cornerRadius: 4).fill(Color.blue))
                 }
-                MyRemindersView()
-                    .frame(width: 350, height: 150) // Adjust the size to your needs
-                    .background(RoundedRectangle(cornerRadius: 4).fill(Color.blue))
-
+                VStack {
+                    Text("My Reminders")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color("ContentS1"))
+                    if HomeView.numReminders(viewModel: viewModel) > 0 {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(viewModel.userPlants) { userPlant in
+                                if userPlant.waterReminder == true {
+                                    VStack {
+                                        ZStack {
+                                            Image(userPlant.plant.image)
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Circle())
+                                            Circle()
+                                                .stroke(lineWidth: 4)
+                                                .frame(width: 50, height: 50)
+                                                .foregroundColor(Color("ContentS2"))
+                                        }
+                                        Text("Every \(userPlant.daysWaterFrequency) Days")
+                                    }
+                                }
+                            }
+                        }
+                        .padding()
+                    }
+                    else {
+                        Text("No Reminders")
+                    }
+                }
+                .frame(width: 350, height: 250)
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color("Feature")))
                 HStack {
                     VStack {
                         Text("Current Weather")
