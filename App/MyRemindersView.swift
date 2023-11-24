@@ -71,6 +71,7 @@ struct MyRemindersView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
                 if MyRemindersView.initialUserPlantNoNotification(viewModel: viewModel) != nil {
                     Button(action: {
                         selectedPlantId = MyRemindersView.initialUserPlantNoNotification(viewModel: viewModel)

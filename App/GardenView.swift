@@ -10,6 +10,7 @@ import SwiftUI
 struct GardenView: View {
     @State private var selectedItem: String? // Replace String with your item type
     @State private var showingSheet = false
+    @State private var showingInfoSheet = false
     @State private var selectedPlantId: UUID = GardenView.initialPlantId()
     @EnvironmentObject var viewModel: UserPlantsViewModel
 
@@ -81,6 +82,11 @@ struct GardenView: View {
                     Text("Planted on: " + (viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.plantDate.formatted(.dateTime.day().month().year()) ?? "No item selected"))
                     Text(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.plant.description ?? "No item selected")
                     Button(action: {
+                        showingInfoSheet = true
+                    }) {
+                        Text("More Info")
+                    }
+                    Button(action: {
                         viewModel.userPlants.removeAll(where: { $0.id.uuidString == selectedItem })
                     }) {
                         Text("Remove")
@@ -103,6 +109,23 @@ struct GardenView: View {
                         }
                         Button("Cancel") {
                             showingSheet = false
+                        }
+                    }
+                }
+            }
+            .sheet(isPresented: $showingInfoSheet) {
+                NavigationView {
+                    VStack {
+                        Text("More Info About \(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.plant.name ?? "No item selected")")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color("Content"))
+                        Text(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.plant.description ?? "No item selected")
+                        Text("Water Frequency: \(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.daysWaterFrequency ?? 0) Days")
+                        // Text(viewModel.userPlants[0].plant.care.diseases.rawValue)
+                        Text("Diseases: \(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})!.plant.care.diseases.rawValue)")
+                        Button("Done") {
+                            showingInfoSheet = false
                         }
                     }
                 }

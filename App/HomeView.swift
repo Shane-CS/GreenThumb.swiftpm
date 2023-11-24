@@ -111,7 +111,7 @@ struct HomeView: View {
                         .frame(width: 30, height: 30)
                 }
                 .frame(width: 350, height: 100) // Adjust the size to your needs
-                .background(RoundedRectangle(cornerRadius: 4).fill(Color("Feature")))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color("Feature")))
 
                 VStack {
                     Text("Gardening Tips")
@@ -135,7 +135,7 @@ struct HomeView: View {
                     }
                 }
                 .frame(width: 350, height: 150) // Adjust the size to your needs
-                .background(RoundedRectangle(cornerRadius: 4).fill(Color("Feature")))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color("Feature")))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
