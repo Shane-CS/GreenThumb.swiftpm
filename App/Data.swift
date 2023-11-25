@@ -263,7 +263,7 @@ let GardeningTipsData: [GardeningTipsDataTipStructure] = [
 ]
 
 // let WeatherData = WeatherDataStructure(temperature: "20", condition: "Sunny", upcoming_temp: ["20", "21", "22"], upcoming_condition: ["Sunny", "Sunny", "Sunny"])
-let WeatherData = WeatherDataStructure(temperature: "10", condition: "Cloudy", upcoming_temp: ["10", "11", "12"], upcoming_condition: ["Cloudy", "Cloudy", "Cloudy"])
+let WeatherData = WeatherDataStructure(temperature: "4", condition: "Cloudy", upcoming_temp: ["10", "11", "12"], upcoming_condition: ["Cloudy", "Cloudy", "Cloudy"])
 
 class UserPlantsViewModel: ObservableObject {
     @Published var userPlants: [UserPlant] {

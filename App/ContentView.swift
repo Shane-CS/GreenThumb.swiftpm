@@ -35,11 +35,6 @@ struct ContentView: View {
                             .tabItem {
                                 Label("My Reminders", systemImage: "star")
                             }
-
-                        SettingsView()
-                            .tabItem {
-                                Label("Settings", systemImage: "hand.thumbsup")
-                            }
                     }
                 }
                 .accentColor(Color("Feature"))

@@ -61,6 +61,7 @@ struct MyRemindersView: View {
                                 Button(action: {
                                     if let index = viewModel.userPlants.firstIndex(where: { $0.id == userPlant.id }) {
                                         viewModel.userPlants[index].waterReminder = false
+                                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [userPlant.id.uuidString])
                                     } else {
                                         print("Plant not found")
                                     }
@@ -110,7 +111,7 @@ struct MyRemindersView: View {
                                     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval((viewModel.userPlants[index].daysWaterFrequency * 60)), repeats: true)
 
                                     // choose a random identifier
-                                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                                    let request = UNNotificationRequest(identifier: viewModel.userPlants[index].id.uuidString, content: content, trigger: trigger)
 
                                     // add our notification request
                                     UNUserNotificationCenter.current().add(request)

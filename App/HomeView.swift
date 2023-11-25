@@ -64,8 +64,7 @@ struct HomeView: View {
                         }
                         .padding()
                     }
-                    .frame(width: 350, height: 200) // Adjust the size to your needs
-                    // .background(RoundedRectangle(cornerRadius: 4).fill(Color.blue))
+                    .frame(width: 350, height: 200)
                 }
                 VStack {
                     Text("My Reminders")
@@ -103,14 +102,14 @@ struct HomeView: View {
                 HStack {
                     VStack {
                         Text("Current Weather")
-                        Text("Temperature: \(WeatherData.temperature)") // Replace with your actual data
-                        Text("Condition: \(WeatherData.condition)") // Replace with your actual data
+                        Text("Temperature: \(WeatherData.temperature)")
+                        Text("Condition: \(WeatherData.condition)")
                     }
                     Image(systemName: WeatherData.currentIcon)
                         .resizable()
                         .frame(width: 30, height: 30)
                 }
-                .frame(width: 350, height: 100) // Adjust the size to your needs
+                .frame(width: 350, height: 100) 
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color("Feature")))
 
                 VStack {
@@ -134,7 +133,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                .frame(width: 350, height: 150) // Adjust the size to your needs
+                .frame(width: 350, height: 150)
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color("Feature")))
             }
         }

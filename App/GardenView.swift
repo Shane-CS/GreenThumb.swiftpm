@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GardenView: View {
-    @State private var selectedItem: String? // Replace String with your item type
+    @State private var selectedItem: String?
     @State private var showingSheet = false
     @State private var showingInfoSheet = false
     @State private var selectedPlantId: UUID = GardenView.initialPlantId()
@@ -87,7 +87,9 @@ struct GardenView: View {
                         Text("More Info")
                     }
                     Button(action: {
+                        let userPlant = viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})!
                         viewModel.userPlants.removeAll(where: { $0.id.uuidString == selectedItem })
+                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [userPlant.id.uuidString])
                     }) {
                         Text("Remove")
                     }
@@ -122,7 +124,6 @@ struct GardenView: View {
                             .foregroundColor(Color("Content"))
                         Text(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.plant.description ?? "No item selected")
                         Text("Water Frequency: \(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})?.daysWaterFrequency ?? 0) Days")
-                        // Text(viewModel.userPlants[0].plant.care.diseases.rawValue)
                         Text("Diseases: \(viewModel.userPlants.first(where: { $0.id.uuidString == selectedItem})!.plant.care.diseases.rawValue)")
                         Button("Done") {
                             showingInfoSheet = false
